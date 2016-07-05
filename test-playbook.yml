@@ -13,6 +13,11 @@
     template:  src=pinglist dest=/home/vagrant/
     when:  inventory_hostname == "playserver"
 
+  - name:  change file permissions
+    sudo:  yes
+    file:  path=/home/vagrant/pingall.py state=touch mode=0755
+    when:  inventory_hostname == "playserver"
+
   - name:  create an entry in hosts file 
     sudo:  yes 
     lineinfile:  dest=/etc/hosts line="192.168.118.1  playserver"
